@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard - BugBounty{% endblock %}
+
+{% block content %}
+<div class="flex justify-between items-center mb-6">
+    <h1 class="text-4xl font-bold text-lime-400">Daftar Bug</h1>
+    <a href="{{ url_for('add_bug') }}" class="bg-lime-500 hover:bg-lime-600 text-gray-900 px-4 py-2 rounded">Tambah Bug</a>
+</div>
+
+<table class="w-full text-left border border-gray-700 rounded overflow-hidden">
+    <thead class="bg-gray-800">
+        <tr>
+            <th class="p-3 border border-gray-700">ID</th>
+            <th class="p-3 border border-gray-700">Judul</th>
+            <th class="p-3 border border-gray-700">Prioritas</th>
+            <th class="p-3 border border-gray-700">Status</th>
+            <th class="p-3 border border-gray-700">Aksi</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for bug in bugs %}
+        <tr class="hover:bg-gray-700">
+            <td class="p-3 border border-gray-700">{{ bug.id }}</td>
+            <td class="p-3 border border-gray-700">{{ bug.title }}</td>
+            <td class="p-3 border border-gray-700">{{ bug.priority }}</td>
+            <td class="p-3 border border-gray-700">{{ bug.status }}</td>
+            <td class="p-3 border border-gray-700 space-x-2">
+                <a href="{{ url_for('edit_bug', id=bug.id) }}" class="text-lime-400 hover:underline">Edit</a>
+                <a href="{{ url_for('delete_bug', id=bug.id) }}" class="text-red-600 hover:underline"
+                   onclick="return confirm('Yakin mau hapus bug ini?');">Hapus</a>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="5" class="text-center p-4 text-gray-500">Belum ada bug yang dilaporkan.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
