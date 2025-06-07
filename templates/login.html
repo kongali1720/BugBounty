@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Login - BugBounty{% endblock %}
+
+{% block content %}
+<div class="max-w-md mx-auto bg-gray-800 p-8 rounded shadow">
+    <h2 class="text-3xl mb-6 text-lime-400 font-semibold text-center">Login Admin</h2>
+    <form method="POST">
+        <label class="block mb-2">Username</label>
+        <input name="username" type="text" required
+            class="w-full p-2 rounded bg-gray-700 border border-gray-600 focus:outline-lime-400" />
+        <label class="block mt-4 mb-2">Password</label>
+        <input name="password" type="password" required
+            class="w-full p-2 rounded bg-gray-700 border border-gray-600 focus:outline-lime-400" />
+        <button type="submit" class="mt-6 w-full bg-lime-500 hover:bg-lime-600 py-2 rounded font-semibold">Login</button>
+    </form>
+</div>
+{% endblock %}
