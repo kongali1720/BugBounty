@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-gray-900 text-gray-100">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% block title %}BugBounty{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen flex flex-col">
+
+<nav class="bg-gray-800 p-4 flex justify-between items-center">
+    <a href="{{ url_for('dashboard') }}" class="text-2xl font-bold text-lime-400">🐞 BugBounty</a>
+    {% if current_user.is_authenticated %}
+    <div>
+        <span class="mr-4">Hi, {{ current_user.username }}</span>
+        <a href="{{ url_for('logout') }}" class="bg-red-600 px-3 py-1 rounded hover:bg-red-700">Logout</a>
+    </div>
+    {% endif %}
+</nav>
+
+<main class="flex-grow container mx-auto p-6">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="mb-4 space-y-2">
+          {% for message in messages %}
+            <div class="bg-red-600 text-white p-2 rounded">{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+</main>
+
+<footer class="bg-gray-800 p-4 text-center text-sm text-gray-500">
+    © 2025 Kongali1720 - BugBounty Project
+</footer>
+
+</body>
+</html>
