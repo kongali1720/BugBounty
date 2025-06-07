@@ -48,3 +48,39 @@ Buka
 # Jalankan app.py saat container start
 
     CMD ["flask", "run", "--host=0.0.0.0"]
+
+---
+
+# Penjelasan:
+
+build: .
+
+Bangun image dari Dockerfile di root project
+
+ports: "5000:5000"
+
+Buka port 5000 ke luar container
+
+environment
+
+Set environment variable Flask supaya production dan app.py sebagai entrypoint
+
+volumes
+
+Mount folder lokal ke container, biar bisa update kode langsung tanpa build ulang (bagus buat development)
+
+command
+
+Jalankan Flask server yang listen di semua interface
+
+## Cara pakai:
+
+Jalankan
+
+        docker-compose up --build
+        
+Buka browser
+
+        http://localhost:5000
+        
+Stop dengan Ctrl+C
