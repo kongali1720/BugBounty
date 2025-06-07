@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}
+    {% if bug %}Edit Bug #{{ bug.id }}{% else %}Tambah Bug Baru{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="max-w-xl mx-auto bg-gray-800 p-8 rounded shadow">
+    <h2 class="text-3xl mb-6 text-lime-400 font-semibold text-center">
+        {% if bug %}Edit Bug #{{ bug.id }}{% else %}Tambah Bug Baru{% endif %}
+    </h2>
+    <form method="POST">
+        <label class="block mb-2">Judul</label>
+        <input type="text" name="title" required
+               value="{{ bug.title if bug else '' }}"
+               class="w-full p-2 rounded bg-gray-700 border border-gray-600 focus:outline-lime-400" />
+        
+        <label class="block mt-4 mb-2">Deskripsi</label>
+        <textarea name="description" rows="5" required
+                  class="w-full p-2 rounded bg-gray-700 border border-gray-600 focus:outline-lime-400">{{ bug.description if bug else '' }}</textarea>
+        
+        {% if bug %}
+        <label class="block mt-4 mb-2">Status</label>
+        <select name="status" class="w-full p-2 rounded bg-gray-700 border border-gray-600 focus:outline-lime-400">
+            <option value="Open" {% if bug.status == 'Open' %}selected{% endif %}>Open</option>
+            <option value="In Progress" {% if bug.status == 'In Progress' %}selected{% endif %}>In Progress</option>
+            <option value="Closed" {% if bug.status == 'Closed' %}selected{% endif %}>Closed</option>
+        </select>
+        {% endif %}
+        
+        <label class="block mt-4 mb-2">Prioritas</label>
+        <select name="priority" required class="w-full p-2 rounded bg-gray-700 border border-gray-600 focus:outline-lime-400">
+            <option value="Low" {% if bug and bug.priority == 'Low' %}selected{% endif %}>Low</option>
+            <option value="Medium" {% if bug and bug.priority == 'Medium' %}selected{% endif %}>Medium</option>
+            <option value="High" {% if bug and bug.priority == 'High' %}selected{% endif %}>High</option>
+        </select>
+        
+        <button type="submit" class="mt-6 w-full bg-lime-500 hover:bg-lime-600 py-2 rounded font-semibold">
+            {% if bug %}Update Bug{% else %}Tambah Bug{% endif %}
+        </button>
+    </form>
+</div>
+{% endblock %}
